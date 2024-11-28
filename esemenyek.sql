@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Nov 28. 10:24
+-- Létrehozás ideje: 2024. Nov 28. 11:06
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `esemenyek`
 --
+CREATE DATABASE IF NOT EXISTS `esemenyek` DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+USE `esemenyek`;
 
 -- --------------------------------------------------------
 
