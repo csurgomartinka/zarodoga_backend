@@ -49,9 +49,43 @@ app.get('/varosLista', (req, res) => {
   });
 });
 
+//Város felvitel
+app.post('/varosFelvitel', (req, res) => {
+  const { vnev} = req.body;
+
+  // Ellenőrzés, hogy minden mezőt megkaptunk-e
+  if (!vnev) {
+    console.log('Hiányzó mező:', { vnev });
+    return res.status(400).send("Minden mezőt ki kell tölteni");
+  }
+
+  const sql = 'INSERT INTO varos (vnev) VALUES (?)';
+
+  pool.query(sql, [vnev], (err, results) => {
+    if (err) {
+      console.error("Hiba történt az SQL végrehajtásakor:", err);
+      return res.status(500).send("Hiba történt a szerver oldalon");
+    }
+    res.send("A város felvitele sikerült");
+  });
+});
+
 // Események listázása
 app.get('/esemenyLista', (req, res) => {
   pool.query('SELECT * from esemeny', (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Hiba");
+    } else {
+      console.log(rows);
+      res.status(200).send(rows);
+    }
+  });
+});
+
+//esemeny utolsó idja
+app.get('/esemenyUtolsoID', (req, res) => {
+  pool.query('SELECT id FROM esemeny ORDER BY id DESC LIMIT 1;', (err, rows) => {
     if (err) {
       console.log(err);
       res.status(500).send("Hiba");
@@ -94,6 +128,40 @@ app.post('/esemenyFelvitel', (req, res) => {
       res.send("Az események sikeresen törlésre kerültek");
     });
   });
+
+  app.post('/helyszinFelvitel', (req, res) => {
+    const { helyszin_nev,varosid,esemenyid} = req.body;
+  
+    // Ellenőrzés, hogy minden mezőt megkaptunk-e
+    if (!helyszin_nev || !varosid || !esemenyid) {
+      console.log('Hiányzó mező(k):', { helyszin_nev,varosid,esemenyid });
+      return res.status(400).send("Minden mezőt ki kell tölteni");
+    }
+  
+    const sql = 'INSERT INTO helyszin (helyszin_nev,varosid,esemenyid) VALUES (?,?,?)';
+  
+    pool.query(sql, [helyszin_nev, varosid, esemenyid], (err, results) => {
+      if (err) {
+        console.error("Hiba történt az SQL végrehajtásakor:", err);
+        return res.status(500).send("Hiba történt a szerver oldalon");
+      }
+      res.send("A helyszin felvitele sikerült");
+    });
+  });
+
+  app.delete('/helyszinTorles', (req, res) => {
+    const sql = 'DELETE FROM helyszin';  // Ez törli az összes rekordot a helyszin táblából
+    
+    pool.query(sql, (err, results) => {
+      if (err) {
+        console.error("Hiba történt az SQL végrehajtásakor:", err);
+        return res.status(500).send("Hiba történt a szerver oldalon");
+      }
+      res.send("Az események sikeresen törlésre kerültek");
+    });
+  });
+
+
 
 // Szerver indítása
 app.listen(port, () => {
