@@ -49,6 +49,19 @@ app.get('/varosLista', (req, res) => {
   });
 });
 
+//Típusok listázása
+app.get('/tipusLista', (req, res) => {
+  pool.query('SELECT * from tipus', (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Hiba");
+    } else {
+      console.log(rows);
+      res.status(200).send(rows);
+    }
+  });
+});
+
 //Város felvitel
 app.post('/varosFelvitel', (req, res) => {
   const { vnev} = req.body;
@@ -81,6 +94,97 @@ app.get('/esemenyLista', (req, res) => {
       res.status(200).send(rows);
     }
   });
+});
+
+//események információinak megjelenítése
+app.get('/adatokLista', (req, res) => {
+  pool.query('SELECT esemeny.id,nev,datum,leiras,vnev,helyszin_nev from esemeny inner join helyszin on esemeny.id = esemenyid inner join varos on varos.id = esemeny.varosid', (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Hiba");
+    } else {
+      console.log(rows);
+      res.status(200).send(rows);
+    }
+  });
+});
+
+// Események keresése név szerint
+app.get('/esemenyKereses', (req, res) => {
+  const { query } = req.query; // A query paraméter kinyerése a URL-ből
+  if (!query) {
+    return res.status(400).send("Nincs keresési paraméter");
+  }
+
+  // A keresési paraméter biztonságos hozzáadása az SQL lekérdezéshez
+  pool.query(
+    `SELECT esemeny.id, nev, datum, leiras, vnev, helyszin_nev 
+     FROM esemeny 
+     INNER JOIN helyszin ON esemeny.id = esemenyid 
+     INNER JOIN varos ON varos.id = esemeny.varosid 
+     WHERE nev LIKE ?`,
+    [`%${query}%`],  // A query paramétert biztonságosan adhatjuk át
+    (err, rows) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).send("Hiba történt a lekérdezés végrehajtása közben.");
+      } else {
+        console.log(rows);
+        res.status(200).json(rows);  // A találatokat JSON formátumban küldjük vissza
+      }
+    }
+  );
+});
+
+// esemény keresése város szerint
+app.get('/varosSzerintKereses', (req, res) => {
+  const { value } = req.query; // A query paraméter kinyerése
+
+  if (!value) {
+      return res.status(400).send("Nincs kiválasztott érték");
+  }
+
+  pool.query(
+      `SELECT esemeny.id, nev, datum, leiras, vnev, helyszin_nev 
+      FROM esemeny 
+      INNER JOIN helyszin ON esemeny.id = esemenyid 
+      INNER JOIN varos ON varos.id = esemeny.varosid 
+      WHERE vnev = ?;`, 
+      [value], // Biztonságosan átadjuk a 'value' paramétert
+      (err, rows) => {
+          if (err) {
+              console.log(err);
+              return res.status(500).send("Hiba történt a lekérdezés végrehajtása közben.");
+          }
+          res.status(200).json(rows);  // Az adatokat JSON formátumban küldjük vissza
+      }
+  );
+});
+
+//típus szerinti keresés
+app.get('/tipusSzerintKereses', (req, res) => {
+  const { value } = req.query; // A query paraméter kinyerése
+
+  if (!value) {
+      return res.status(400).send("Nincs kiválasztott érték");
+  }
+
+  pool.query(
+      `SELECT esemeny.id, nev, datum, leiras, vnev, helyszin_nev, tipus_nev
+      FROM esemeny 
+      INNER JOIN helyszin ON esemeny.id = esemenyid 
+      INNER JOIN varos ON varos.id = esemeny.varosid
+      INNER JOIN tipus ON tipus_id = esemeny.tipusid
+      WHERE tipus_nev = ?;`, 
+      [value], // Biztonságosan átadjuk a 'value' paramétert
+      (err, rows) => {
+          if (err) {
+              console.log(err);
+              return res.status(500).send("Hiba történt a lekérdezés végrehajtása közben.");
+          }
+          res.status(200).json(rows);  // Az adatokat JSON formátumban küldjük vissza
+      }
+  );
 });
 
 //esemeny utolsó idja
