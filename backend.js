@@ -38,7 +38,7 @@ app.get('/megjelenitEsemeny', (req, res) => {
 
 // Városok listázása
 app.get('/varosLista', (req, res) => {
-  pool.query('SELECT vnev from varos', (err, rows) => {
+  pool.query('SELECT vnev from varos order by vnev', (err, rows) => {
     if (err) {
       console.log(err);
       res.status(500).send("Hiba");
@@ -98,7 +98,7 @@ app.get('/esemenyLista', (req, res) => {
 
 //események információinak megjelenítése
 app.get('/adatokLista', (req, res) => {
-  pool.query('SELECT esemeny.id,nev,datum,leiras,vnev,helyszin_nev from esemeny inner join helyszin on esemeny.id = esemenyid inner join varos on varos.id = esemeny.varosid', (err, rows) => {
+  pool.query('SELECT esemeny.id,nev,datum,leiras,vnev,helyszin_nev, reszletek from esemeny inner join helyszin on esemeny.id = esemenyid inner join varos on varos.id = esemeny.varosid order by datum_kezdet', (err, rows) => {
     if (err) {
       console.log(err);
       res.status(500).send("Hiba");
@@ -187,6 +187,32 @@ app.get('/tipusSzerintKereses', (req, res) => {
   );
 });
 
+//közös keresés
+app.get('/kozosKereses', (req, res) => {
+  const { tipus, varos } = req.query; // A query paraméter kinyerése
+
+  if (!tipus || !varos) {
+      return res.status(400).send("Nincs kiválasztott érték");
+  }
+
+  pool.query(
+      `SELECT esemeny.id, nev, datum, leiras, vnev, helyszin_nev, tipus_nev
+      FROM esemeny 
+      INNER JOIN helyszin ON esemeny.id = esemenyid 
+      INNER JOIN varos ON varos.id = esemeny.varosid
+      INNER JOIN tipus ON tipus_id = esemeny.tipusid
+      WHERE tipus_nev = ? AND vnev = ?;`, 
+      [tipus,varos], // Biztonságosan átadjuk a 'value' paramétert
+      (err, rows) => {
+          if (err) {
+              console.log(err);
+              return res.status(500).send("Hiba történt a lekérdezés végrehajtása közben.");
+          }
+          res.status(200).json(rows);  // Az adatokat JSON formátumban küldjük vissza
+      }
+  );
+});
+
 //esemeny utolsó idja
 app.get('/esemenyUtolsoID', (req, res) => {
   pool.query('SELECT id FROM esemeny ORDER BY id DESC LIMIT 1;', (err, rows) => {
@@ -202,17 +228,17 @@ app.get('/esemenyUtolsoID', (req, res) => {
 
 // Esemény felvitele
 app.post('/esemenyFelvitel', (req, res) => {
-    const { nev, datum, varosid, tipusid, leiras } = req.body;
-  
+    const { nev, datum, varosid, tipusid, leiras, reszletek, datum_kezdet, datum_veg } = req.body;
+    console.log('Kapott adatok:', {nev, datum,varosid, tipusid, leiras, reszletek, datum_kezdet, datum_veg})
     // Ellenőrzés, hogy minden mezőt megkaptunk-e
-    if (!nev || !datum || !varosid || !tipusid || !leiras) {
-      console.log('Hiányzó mező(k):', { nev, datum, varosid, tipusid, leiras });
+    if (!nev || !datum || !varosid || !tipusid || !leiras || !reszletek || !datum_kezdet || !datum_veg) {
+      console.log('Hiányzó mező(k):', { nev, datum, varosid, tipusid, leiras, reszletek, datum_kezdet, datum_veg});
       return res.status(400).send("Minden mezőt ki kell tölteni");
     }
   
-    const sql = 'INSERT INTO esemeny (nev, datum, varosid, tipusid, leiras) VALUES (?, ?, ?, ?, ?)';
+    const sql = 'INSERT INTO esemeny (nev, datum, varosid, tipusid, leiras, reszletek, datum_kezdet, datum_veg) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
   
-    pool.query(sql, [nev, datum, varosid, tipusid, leiras], (err, results) => {
+    pool.query(sql, [nev, datum, varosid, tipusid, leiras, reszletek, datum_kezdet, datum_veg], (err, results) => {
       if (err) {
         console.error("Hiba történt az SQL végrehajtásakor:", err);
         return res.status(500).send("Hiba történt a szerver oldalon");
@@ -265,6 +291,18 @@ app.post('/esemenyFelvitel', (req, res) => {
     });
   });
 
+  //város törlés
+  app.delete('/varosTorles', (req, res) => {
+    const sql = 'DELETE FROM varos';  // Ez törli az összes rekordot az esemeny táblából
+    
+    pool.query(sql, (err, results) => {
+      if (err) {
+        console.error("Hiba történt az SQL végrehajtásakor:", err);
+        return res.status(500).send("Hiba történt a szerver oldalon");
+      }
+      res.send("A városok sikeresen törlésre kerültek");
+    });
+  });
 
 
 // Szerver indítása
