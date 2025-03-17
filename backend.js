@@ -1,311 +1,413 @@
-const express = require('express');
-const mysql = require('mysql');
-var cors = require('cors');
+const express = require('express')
+const mysql = require('mysql')
+var cors = require('cors')
+const jwt=require('jsonwebtoken')
+const bodyParser=require('body-parser')
+const nodemailer = require('nodemailer')
 
-const app = express();
-const port = 3000;
+const app = express()
+const port = 3000
 
-app.use(cors());
+app.use(cors())
 app.use(express.json());
+app.use(bodyParser.json());
+require('dotenv').config();
 
-// Kapcsolat-pool létrehozása
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'esemenyek',
-  connectionLimit: 10,  // A maximális kapcsolatok száma a poolban
-});
 
-// A pool-t használó kapcsolat helyett közvetlenül használhatjuk a pool-t
-// Ez egy aszinkron query példát használva biztosítja, hogy több kapcsolat is párhuzamosan működhet.
+
+const SECRET_KEY = process.env.SECRET_KEY;
+
+var connection
+function kapcsolat(){
+    connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'esemenyek'
+      })
+      connection.connect()
+}
+
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Hello World!')
+})
+
+
+
+
+
+// Nodemailer beállítások az email küldéshez
+const transporter = nodemailer.createTransport({
+  service: 'gmail',  // Email szolgáltató
+  auth: {
+    user: 'magyarorszagesemenyei@gmail.com', // Küldő email cím
+    pass: 'magyarorszagesemenyei123'   // Küldő email jelszó
+  }
 });
 
-// Események megjelenítése
+// Endpont, amely az emailt küldi
+app.post('/send-email', (req, res) => {
+  const { email } = req.body;
+
+  // Ellenőrizzük, hogy az email cím helyes-e
+  if (!email) {
+    return res.status(400).json({ success: false, message: 'Email cím megadása kötelező.' });
+  }
+
+  // Email küldése
+  const mailOptions = {
+    from: 'magyarorszagesemenyei@gmail.com',
+    to: email,
+    subject: 'Magyarország eseményei',
+    text: 'Köszönjük hogy feliratkoztál a hírlevelünkre!'
+  };
+
+  // Email küldése a Nodemailer segítségével
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      return res.status(500).json({ success: false, message: 'Nem sikerült elküldeni az emailt.' });
+    }
+
+  });
+});
+
+
+
+
+
+
+
+
+
+//regisztrált felhasználók
 app.get('/megjelenitEsemeny', (req, res) => {
-  pool.query('SELECT esemeny.id, nev, datum, vnev from esemeny inner join varos on esemeny.varosid = varos.id', (err, rows) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Hiba");
-    } else {
-      console.log(rows);
-      res.status(200).send(rows);
-    }
-  });
-});
+    kapcsolat()
+    connection.query('SELECT esemeny.id,nev,datum,vnev from esemeny inner join varos on esemeny.helyszin = varos.id', (err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send(rows)
+        }
+      })
+      connection.end()
+  })
 
-// Városok listázása
-app.get('/varosLista', (req, res) => {
-  pool.query('SELECT vnev from varos order by vnev', (err, rows) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Hiba");
-    } else {
-      console.log(rows);
-      res.status(200).send(rows);
-    }
-  });
-});
+// admin bejelentkezes
+app.post('/adminBejelentkezes', (req, res) => {
+  kapcsolat();
 
-//Típusok listázása
-app.get('/tipusLista', (req, res) => {
-  pool.query('SELECT * from tipus', (err, rows) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Hiba");
-    } else {
-      console.log(rows);
-      res.status(200).send(rows);
-    }
-  });
-});
+  // Ellenőrizd, hogy a bemeneti mezők nem üresek
+  const admin_felhasznalonev = req.body.admin_felhasznalonev;
+  const admin_jelszo = req.body.admin_jelszo;
 
-//Város felvitel
-app.post('/varosFelvitel', (req, res) => {
-  const { vnev} = req.body;
-
-  // Ellenőrzés, hogy minden mezőt megkaptunk-e
-  if (!vnev) {
-    console.log('Hiányzó mező:', { vnev });
-    return res.status(400).send("Minden mezőt ki kell tölteni");
+  if (!admin_felhasznalonev || !admin_jelszo) {
+    return res.status(400).send("Kérlek, add meg mindkét mezőt!");
   }
 
-  const sql = 'INSERT INTO varos (vnev) VALUES (?)';
+  let parameterek = [admin_felhasznalonev, admin_jelszo];
 
-  pool.query(sql, [vnev], (err, results) => {
-    if (err) {
-      console.error("Hiba történt az SQL végrehajtásakor:", err);
-      return res.status(500).send("Hiba történt a szerver oldalon");
-    }
-    res.send("A város felvitele sikerült");
-  });
-});
-
-// Események listázása
-app.get('/esemenyLista', (req, res) => {
-  pool.query('SELECT * from esemeny', (err, rows) => {
+  connection.query('SELECT * from admin where admin_felhasznalonev like binary ? and admin_jelszo like binary ?', parameterek, (err, rows, fields) => {
     if (err) {
       console.log(err);
-      res.status(500).send("Hiba");
+      res.status(500).send("Hiba történt a bejelentkezés során.");
     } else {
-      console.log(rows);
-      res.status(200).send(rows);
-    }
-  });
-});
+      if (rows.length > 0) {
+        const admin = rows[0];
+        console.log("Sikeres bejelentkezés");
 
-//események információinak megjelenítése
-app.get('/adatokLista', (req, res) => {
-  pool.query('SELECT esemeny.id,nev,datum,leiras,vnev,helyszin_nev, reszletek from esemeny inner join helyszin on esemeny.id = esemenyid inner join varos on varos.id = esemeny.varosid order by datum_kezdet', (err, rows) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Hiba");
-    } else {
-      console.log(rows);
-      res.status(200).send(rows);
-    }
-  });
-});
+        // jwt token csinálás
+        const token = jwt.sign(
+          { admin_felhasznalonev: admin.admin_felhasznalonev },
+          SECRET_KEY,
+          { expiresIn: '1h' }
+        );
 
-// Események keresése név szerint
-app.get('/esemenyKereses', (req, res) => {
-  const { query } = req.query; // A query paraméter kinyerése a URL-ből
-  if (!query) {
-    return res.status(400).send("Nincs keresési paraméter");
-  }
-
-  // A keresési paraméter biztonságos hozzáadása az SQL lekérdezéshez
-  pool.query(
-    `SELECT esemeny.id, nev, datum, leiras, vnev, helyszin_nev 
-     FROM esemeny 
-     INNER JOIN helyszin ON esemeny.id = esemenyid 
-     INNER JOIN varos ON varos.id = esemeny.varosid 
-     WHERE nev LIKE ?`,
-    [`%${query}%`],  // A query paramétert biztonságosan adhatjuk át
-    (err, rows) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).send("Hiba történt a lekérdezés végrehajtása közben.");
+        // token visszaadása
+        res.status(200).json({ message: "Sikeres bejelentkezés!", token });
       } else {
-        console.log(rows);
-        res.status(200).json(rows);  // A találatokat JSON formátumban küldjük vissza
+        res.status(401).send("Hibás felhasználónév vagy jelszó");
       }
     }
-  );
+  });
+
+  connection.end();
 });
 
-// esemény keresése város szerint
-app.get('/varosSzerintKereses', (req, res) => {
-  const { value } = req.query; // A query paraméter kinyerése
 
-  if (!value) {
-      return res.status(400).send("Nincs kiválasztott érték");
-  }
 
-  pool.query(
-      `SELECT esemeny.id, nev, datum, leiras, vnev, helyszin_nev 
-      FROM esemeny 
-      INNER JOIN helyszin ON esemeny.id = esemenyid 
-      INNER JOIN varos ON varos.id = esemeny.varosid 
-      WHERE vnev = ?;`, 
-      [value], // Biztonságosan átadjuk a 'value' paramétert
-      (err, rows) => {
+
+
+
+  app.get('/varosnevek', (req, res) => {
+    kapcsolat()
+    connection.query('SELECT vnev from varos order by vnev', (err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send(rows)
+        }
+      })
+      connection.end()
+      
+  })
+
+
+  app.get('/kepek', (req, res) => {
+    kapcsolat()
+    connection.query('SELECT * from kepek', (err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send(rows)
+        }
+      })
+      connection.end()
+      
+  })
+
+
+
+  app.get('/esemenytipusok', (req, res) => {
+    kapcsolat()
+    connection.query('SELECT * from tipus', (err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send(rows)
+        }
+      })
+      connection.end()
+      
+  })
+
+  app.post('/kapcsolatfelvitel', (req, res) => {
+    kapcsolat()
+    connection.query(`
+      INSERT INTO kapcsolat VALUES (NULL, ?,?,?,?,0 );
+      
+      `, [req.body.bevitel1, req.body.bevitel2 , req.body.bevitel3, req.body.datum], (err, rows, fields) => {
+      if (err) {
+        console.log("Hiba")
+        console.log(err)
+        res.status(500).send("Hiba")
+      }
+      else {
+        console.log("Sikeres felvitel!")
+        res.status(200).send("Sikeres felvitel!")
+      }
+    })
+    connection.end()
+  })
+
+  //---------------------------------------------------------
+  app.get('/admin', (req, res) => {
+    kapcsolat()
+    connection.query('SELECT * from admin', (err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send(rows)
+        }
+      })
+      connection.end()
+      
+  })
+
+  //-----------------------------
+
+  app.get('/visszajelzesek', (req, res) => {
+    kapcsolat()
+    connection.query('SELECT * from kapcsolat', (err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send(rows)
+        }
+      })
+      connection.end()
+      
+  })
+
+//-------------------------------------
+  app.delete('/visszajelzestorles', (req, res) => {
+    kapcsolat()
+    connection.query('DELETE FROM kapcsolat WHERE kapcsolat_id=?',[req.body.bevitel1],(err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send("Sikeres")
+        }
+      })
+      connection.end()
+      
+  })
+
+  //----------------------------------------------
+  app.post('/elfogadvauzenetek', (req, res) => {
+    kapcsolat()
+    connection.query(`
+      update kapcsolat set uzenet_elfogadva=1 where kapcsolat_id =?
+      
+      `, [req.body.bevitel1], (err, rows, fields) => {
+      if (err) {
+        console.log("Hiba")
+        console.log(err)
+        res.status(500).send("Hiba")
+      }
+      else {
+        console.log("Sikeres")
+        res.status(200).send("Sikeres")
+      }
+    })
+    connection.end()
+  })
+  //-----------------------------------------------------
+  //elfogadva uzenetek megjelenitese
+  app.get('/elfogadvamegjelenitve', (req, res) => {
+    kapcsolat()
+    connection.query('SELECT nev,email,uzenet,datum from kapcsolat where uzenet_elfogadva=1 ', (err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send(rows)
+        }
+      })
+      connection.end()
+      
+  })
+
+    //elfogadva uzenetek megjelenitese fooldalon
+    app.get('/elfogadvamegjelenitvefooldalon', (req, res) => {
+      kapcsolat()
+      connection.query('SELECT nev,email,uzenet,datum from kapcsolat where kapcsolat_id<4 ', (err, rows, fields) => {
           if (err) {
-              console.log(err);
-              return res.status(500).send("Hiba történt a lekérdezés végrehajtása közben.");
+              console.log(err)
+              res.status(500).send("Hiba")
           }
-          res.status(200).json(rows);  // Az adatokat JSON formátumban küldjük vissza
-      }
-  );
-});
-
-//típus szerinti keresés
-app.get('/tipusSzerintKereses', (req, res) => {
-  const { value } = req.query; // A query paraméter kinyerése
-
-  if (!value) {
-      return res.status(400).send("Nincs kiválasztott érték");
-  }
-
-  pool.query(
-      `SELECT esemeny.id, nev, datum, leiras, vnev, helyszin_nev, tipus_nev
-      FROM esemeny 
-      INNER JOIN helyszin ON esemeny.id = esemenyid 
-      INNER JOIN varos ON varos.id = esemeny.varosid
-      INNER JOIN tipus ON tipus_id = esemeny.tipusid
-      WHERE tipus_nev = ?;`, 
-      [value], // Biztonságosan átadjuk a 'value' paramétert
-      (err, rows) => {
-          if (err) {
-              console.log(err);
-              return res.status(500).send("Hiba történt a lekérdezés végrehajtása közben.");
+          else{
+              console.log(rows)
+              res.status(200).send(rows)
           }
-          res.status(200).json(rows);  // Az adatokat JSON formátumban küldjük vissza
-      }
-  );
-});
+        })
+        connection.end()
+        
+    })
 
-//közös keresés
-app.get('/kozosKereses', (req, res) => {
-  const { tipus, varos } = req.query; // A query paraméter kinyerése
+  //összes adat
+  app.get('/adatokLista', (req, res) => {
+    kapcsolat()
+    connection.query('SELECT esemeny.id,nev,datum,leiras,vnev,helyszin_nev,tipus_nev from esemeny inner join helyszin on esemeny.id = esemenyid inner join varos on varos.id = esemeny.varosid inner join tipus on tipus_id=esemeny.tipusid order by vnev,datum_kezdet ', (err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send(rows)
+        }
+      })
+      connection.end()
+      
+  })
 
-  if (!tipus || !varos) {
-      return res.status(400).send("Nincs kiválasztott érték");
-  }
 
-  pool.query(
-      `SELECT esemeny.id, nev, datum, leiras, vnev, helyszin_nev, tipus_nev
-      FROM esemeny 
-      INNER JOIN helyszin ON esemeny.id = esemenyid 
-      INNER JOIN varos ON varos.id = esemeny.varosid
-      INNER JOIN tipus ON tipus_id = esemeny.tipusid
-      WHERE tipus_nev = ? AND vnev = ?;`, 
-      [tipus,varos], // Biztonságosan átadjuk a 'value' paramétert
-      (err, rows) => {
-          if (err) {
-              console.log(err);
-              return res.status(500).send("Hiba történt a lekérdezés végrehajtása közben.");
-          }
-          res.status(200).json(rows);  // Az adatokat JSON formátumban küldjük vissza
-      }
-  );
-});
+  app.get('/szures/:kereses', (req, res) => {
+    kapcsolat()
+    connection.query(`SELECT esemeny.id,nev,datum,leiras,vnev,helyszin_nev,tipus_nev from esemeny inner join helyszin on esemeny.id = esemenyid inner join varos on varos.id = esemeny.varosid inner join tipus on tipus_id=esemeny.tipusid where vnev="${req.params.kereses}" order by datum_kezdet`, (err, rows, fields) => {
+        if (err) throw err
+        console.log(rows)
+        res.send(rows)
+  })
+  connection.end()
+  })
 
-//esemeny utolsó idja
-app.get('/esemenyUtolsoID', (req, res) => {
-  pool.query('SELECT id FROM esemeny ORDER BY id DESC LIMIT 1;', (err, rows) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Hiba");
-    } else {
-      console.log(rows);
-      res.status(200).send(rows);
-    }
-  });
-});
 
-// Esemény felvitele
-app.post('/esemenyFelvitel', (req, res) => {
-    const { nev, datum, varosid, tipusid, leiras, reszletek, datum_kezdet, datum_veg } = req.body;
-    console.log('Kapott adatok:', {nev, datum,varosid, tipusid, leiras, reszletek, datum_kezdet, datum_veg})
-    // Ellenőrzés, hogy minden mezőt megkaptunk-e
-    if (!nev || !datum || !varosid || !tipusid || !leiras || !reszletek || !datum_kezdet || !datum_veg) {
-      console.log('Hiányzó mező(k):', { nev, datum, varosid, tipusid, leiras, reszletek, datum_kezdet, datum_veg});
-      return res.status(400).send("Minden mezőt ki kell tölteni");
-    }
   
-    const sql = 'INSERT INTO esemeny (nev, datum, varosid, tipusid, leiras, reszletek, datum_kezdet, datum_veg) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-  
-    pool.query(sql, [nev, datum, varosid, tipusid, leiras, reszletek, datum_kezdet, datum_veg], (err, results) => {
-      if (err) {
-        console.error("Hiba történt az SQL végrehajtásakor:", err);
-        return res.status(500).send("Hiba történt a szerver oldalon");
-      }
-      res.send("Az esemény felvitele sikerült");
-    });
-  });
-  
-  app.delete('/esemenyTorles', (req, res) => {
-    const sql = 'DELETE FROM esemeny';  // Ez törli az összes rekordot az esemeny táblából
-    
-    pool.query(sql, (err, results) => {
-      if (err) {
-        console.error("Hiba történt az SQL végrehajtásakor:", err);
-        return res.status(500).send("Hiba történt a szerver oldalon");
-      }
-      res.send("Az események sikeresen törlésre kerültek");
-    });
-  });
-
-  app.post('/helyszinFelvitel', (req, res) => {
-    const { helyszin_nev,varosid,esemenyid} = req.body;
-  
-    // Ellenőrzés, hogy minden mezőt megkaptunk-e
-    if (!helyszin_nev || !varosid || !esemenyid) {
-      console.log('Hiányzó mező(k):', { helyszin_nev,varosid,esemenyid });
-      return res.status(400).send("Minden mezőt ki kell tölteni");
-    }
-  
-    const sql = 'INSERT INTO helyszin (helyszin_nev,varosid,esemenyid) VALUES (?,?,?)';
-  
-    pool.query(sql, [helyszin_nev, varosid, esemenyid], (err, results) => {
-      if (err) {
-        console.error("Hiba történt az SQL végrehajtásakor:", err);
-        return res.status(500).send("Hiba történt a szerver oldalon");
-      }
-      res.send("A helyszin felvitele sikerült");
-    });
-  });
-
-  app.delete('/helyszinTorles', (req, res) => {
-    const sql = 'DELETE FROM helyszin';  // Ez törli az összes rekordot a helyszin táblából
-    
-    pool.query(sql, (err, results) => {
-      if (err) {
-        console.error("Hiba történt az SQL végrehajtásakor:", err);
-        return res.status(500).send("Hiba történt a szerver oldalon");
-      }
-      res.send("Az események sikeresen törlésre kerültek");
-    });
-  });
-
-  //város törlés
-  app.delete('/varosTorles', (req, res) => {
-    const sql = 'DELETE FROM varos';  // Ez törli az összes rekordot az esemeny táblából
-    
-    pool.query(sql, (err, results) => {
-      if (err) {
-        console.error("Hiba történt az SQL végrehajtásakor:", err);
-        return res.status(500).send("Hiba történt a szerver oldalon");
-      }
-      res.send("A városok sikeresen törlésre kerültek");
-    });
-  });
+  app.get('/szurestipus/:kereses', (req, res) => {
+    kapcsolat()
+    connection.query(`SELECT esemeny.id,nev,datum,leiras,vnev,helyszin_nev,tipus_nev from esemeny inner join helyszin on esemeny.id = esemenyid inner join varos on varos.id = esemeny.varosid inner join tipus on tipus_id=esemeny.tipusid where tipus_nev="${req.params.kereses}" order by vnev,datum_kezdet `, (err, rows, fields) => {
+        if (err) throw err
+        console.log(rows)
+        res.send(rows)
+  })
+  connection.end()
+  })
 
 
-// Szerver indítása
+  //input a varosok keresesehez
+  app.get('/keresek/:kereses', (req, res) => {
+    kapcsolat()
+    connection.query(`SELECT esemeny.id,nev,datum,leiras,vnev,helyszin_nev,tipus_nev from esemeny inner join helyszin on esemeny.id = esemenyid inner join varos on varos.id = esemeny.varosid inner join tipus on tipus_id=esemeny.tipusid where vnev like"%${req.params.kereses}%" or tipus_nev like "%${req.params.kereses}%" or nev like "%${req.params.kereses}%"`, (err, rows, fields) => {
+        if (err) throw err
+        console.log(rows)
+        res.send(rows)
+  })
+connection.end()
+})
+
+
+
+
+//elfogadva uzenetek
+  app.get('/megjelenituzenetek', (req, res) => {
+    kapcsolat()
+    connection.query('SELECT * from elfogadva', (err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send(rows)
+        }
+      })
+      connection.end()
+      
+  })
+
+  //----------------------------------
+  app.get('/varosokkulon', (req, res) => {
+    kapcsolat()
+    connection.query('SELECT * from esemeny inner join varos on varos.id=esemeny.varosid where vnev=?',[req.body.bevitel1], (err, rows, fields) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send("Hiba")
+        }
+        else{
+            console.log(rows)
+            res.status(200).send(rows)
+        }
+      })
+      connection.end()
+      
+  })
+
+
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+  console.log(`Example app listening on port ${port}`)
+})
