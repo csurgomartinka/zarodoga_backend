@@ -1,0 +1,892 @@
+ [
+    {
+        "date": "2024. augusztus 10 – december 31.",
+        "title": "Kiállítás a 60. születésnapját ünneplő Szent Erzsébet Mórahalmi Gyógyfürdőben 2024",
+        "location": "Mórahalom"
+    },
+    {
+        "date": "2024. november 15 – december 31.",
+        "title": "Vörösmarty Classic Xmas - Karácsonyi Vásár a Vörösmarty téren 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. november 15 – 2025. január 01.",
+        "title": "Advent Bazilika - Adventi ünnep a Bazilikánál 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. november 15 – 2025. február 02.",
+        "title": "Városháza Téli Élménypark és Karácsonyi Vásár 2024 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. november 20 – december 24.",
+        "title": "Corvin Hütte – Karácsonyi Vásár a Corvin sétányon 2024 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. november 22.",
+        "title": "ÁRVA FIÚ - Cserháti Zsuzsa és Szécsi Pál története – Kiskunmajsa",
+        "location": "Kiskunmajsa"
+    },
+    {
+        "date": "2024. november 22 – 2025. január 01.",
+        "title": "Fehérvári Advent 2024 Székesfehérvár",
+        "location": "Székesfehérvár"
+    },
+    {
+        "date": "2024. november 22 – december 23.",
+        "title": "Szombathelyi Advent 2024",
+        "location": "Szombathely"
+    },
+    {
+        "date": "2024. november 23.",
+        "title": "Mórahalmi Pálinka- és Tepertőfesztivál 2024",
+        "location": "Mórahalom"
+    },
+    {
+        "date": "2024. november 23.",
+        "title": "Gyomaendrődi Disznótoros és Böllérpálinka Verseny 2024",
+        "location": "Gyomaendrőd"
+    },
+    {
+        "date": "2024. november 23.",
+        "title": "Vendégváró Disznótoros 2024 Balatonfűzfő",
+        "location": "Balatonfűzfő"
+    },
+    {
+        "date": "2024. november 23.",
+        "title": "Különben jól vagyok - este POPPER PÉTER írásaiból – Szombathely",
+        "location": "Szombathely"
+    },
+    {
+        "date": "2024. november 23.",
+        "title": "Erzsébet nap a Gödöllői Királyi Kastélyban 2024",
+        "location": "Gödöllő"
+    },
+    {
+        "date": "2024. november 25.",
+        "title": "Különben jól vagyok - este POPPER PÉTER írásaiból – Várpalota",
+        "location": "Várpalota"
+    },
+    {
+        "date": "2024. november 25 – december 24.",
+        "title": "Egerszegi Advent 2024 Zalaegerszeg",
+        "location": "Zalaegerszeg"
+    },
+    {
+        "date": "2024. november 26.",
+        "title": "Különben jól vagyok - este POPPER PÉTER írásaiból – Debrecen",
+        "location": "Debrecen"
+    },
+    {
+        "date": "2024. november 27.",
+        "title": "Különben jól vagyok - este POPPER PÉTER írásaiból – Tatabánya",
+        "location": "Tatabánya"
+    },
+    {
+        "date": "2024. november 27 – december 31.",
+        "title": "Advent Vácon 2024",
+        "location": "Vác"
+    },
+    {
+        "date": "2024. november 28 – 30.",
+        "title": "Freeze Fesztivál 2024 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. november 28.",
+        "title": "Különben jól vagyok - este POPPER PÉTER írásaiból – Zalaegerszeg",
+        "location": "Zalaegerszeg"
+    },
+    {
+        "date": "2024. november 28 – 2025. január 01.",
+        "title": "Advent 2024 Szolnok",
+        "location": "Szolnok"
+    },
+    {
+        "date": "2024. november 28 – december 31.",
+        "title": "Ünnepi fényvarázs Hévízen 2024",
+        "location": "Hévíz"
+    },
+    {
+        "date": "2024. november 28 – 30.",
+        "title": "Városnap 2024 Siófok",
+        "location": "Siófok"
+    },
+    {
+        "date": "2024. november 28.",
+        "title": "Traccsparti Szabó Győzővel 2024 Gyenesdiás",
+        "location": "Gyenesdiás"
+    },
+    {
+        "date": "2024. november 28 – december 15.",
+        "title": "Lillafüredi Mesebirodalom és Diósgyőri Mikulásvonat 2024",
+        "location": "Miskolc"
+    },
+    {
+        "date": "2024. november 29 – december 29.",
+        "title": "Öt Templom Advent 2024 Győr",
+        "location": "Győr"
+    },
+    {
+        "date": "2024. november 29.",
+        "title": "Különben jól vagyok - este POPPER PÉTER írásaiból – Oroszlány",
+        "location": "Oroszlány"
+    },
+    {
+        "date": "2024. november 29.",
+        "title": "Betlehem állítás 2024 Balatonfüred",
+        "location": "Balatonfüred"
+    },
+    {
+        "date": "2024. november 29 – december 24.",
+        "title": "Szegedi Karácsonyi Hetek 2024",
+        "location": "Szeged"
+    },
+    {
+        "date": "2024. november 29 – december 22.",
+        "title": "Esztergomi Adventi Vásár 2024",
+        "location": "Esztergom"
+    },
+    {
+        "date": "2024. november 29 – 2025. január 01.",
+        "title": "Téli Csodaország és Kecskeméti Advent 2024",
+        "location": "Kecskemét"
+    },
+    {
+        "date": "2024. november 29 – december 23.",
+        "title": "Debreceni Adventi Vásár 2024",
+        "location": "Debrecen"
+    },
+    {
+        "date": "2024. november 29 – december 22.",
+        "title": "Advent 2024 Dunakeszi",
+        "location": "Dunakeszi"
+    },
+    {
+        "date": "2024. november 29 – december 24.",
+        "title": "Pécsi Advent  – Kézműves- és Mesevásár 2024",
+        "location": "Pécs"
+    },
+    {
+        "date": "2024. november 29 – december 24.",
+        "title": "Eger Advent 2024",
+        "location": "Eger"
+    },
+    {
+        "date": "2024. november 29 – december 22.",
+        "title": "Advent 2024 Gyöngyös",
+        "location": "Gyöngyös"
+    },
+    {
+        "date": "2024. november 29 – december 24.",
+        "title": "Advent 2024 Sopron",
+        "location": "Sopron"
+    },
+    {
+        "date": "2024. november 29 – 2025. január 02.",
+        "title": "Győri Adventi Vásár 2024",
+        "location": "Győr"
+    },
+    {
+        "date": "2024. november 29 – december 31.",
+        "title": "Advent 2024 Encs",
+        "location": "Encs"
+    },
+    {
+        "date": "2024. november 29 – december 21.",
+        "title": "Füredi Advent 2024 Balatonfüred",
+        "location": "Balatonfüred"
+    },
+    {
+        "date": "2024. november 29 – december 22.",
+        "title": "Bókay Karácsony – Advent a Bókay-kertben 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. november 29 – december 01.",
+        "title": "Adventi vásár a Kékszalag Port kikötőben 2024 Balatonfüred",
+        "location": "Balatonfüred"
+    },
+    {
+        "date": "2024. november 29 – december 22.",
+        "title": "Advent Óbudán 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. november 29 – december 21.",
+        "title": "Advent 2024 Budaörs",
+        "location": "Budaörs"
+    },
+    {
+        "date": "2024. november 29 – december 22.",
+        "title": "Ünnepváró programok Felsőörsön 2024",
+        "location": "Felsőörs"
+    },
+    {
+        "date": "2024. november 29 – december 22.",
+        "title": "Advent 2024 Miskolc",
+        "location": "Miskolc"
+    },
+    {
+        "date": "2024. november 30.",
+        "title": "Just Clear Életmód és Fitness Konferencia 2024",
+        "location": ""
+    },
+    {
+        "date": "2024. november 30.",
+        "title": "Tatai Vadlúd Sokadalom 2024",
+        "location": "Tata"
+    },
+    {
+        "date": "2024. november 30.",
+        "title": "ÁRVA FIÚ - Cserháti Zsuzsa és Szécsi Pál története – Fonyód",
+        "location": "Fonyód"
+    },
+    {
+        "date": "2024. november 30 – december 24.",
+        "title": "Téli Varázs Siófokon 2024",
+        "location": "Siófok"
+    },
+    {
+        "date": "2024. november 30 – december 22.",
+        "title": "Mohácsi Adventi Vásár 2024",
+        "location": "Mohács"
+    },
+    {
+        "date": "2024. november 30 – december 24.",
+        "title": "Félegyházi Advent 2024 Kiskunfélegyháza",
+        "location": "Kiskunfélegyháza"
+    },
+    {
+        "date": "2024. november 30 – december 22.",
+        "title": "Adventi forgatag és karácsonyi vásár 2024 Nagykanizsa",
+        "location": "Nagykanizsa"
+    },
+    {
+        "date": "2024. november 30 – december 31.",
+        "title": "Ceglédi Advent 2024",
+        "location": "Cegléd"
+    },
+    {
+        "date": "2024. november 30 – 2025. január 05.",
+        "title": "Advent és Karácsony Keszthelyen 2024",
+        "location": "Keszthely"
+    },
+    {
+        "date": "2024. november 30 – december 21.",
+        "title": "Adventi hétvégék Zalakaroson 2024",
+        "location": "Zalakaros"
+    },
+    {
+        "date": "2024. november 30 – december 21.",
+        "title": "Túrkevei Karácsonyi Falu 2024",
+        "location": "Túrkeve"
+    },
+    {
+        "date": "2024. november 30 – december 30.",
+        "title": "Adventi vásár az Érseki palota díszudvarán 2024 Eger",
+        "location": "Eger"
+    },
+    {
+        "date": "2024. november 30 – december 21.",
+        "title": "Advent 2024 Budakalász",
+        "location": "Budakalász"
+    },
+    {
+        "date": "2024. november 30 – december 22.",
+        "title": "Csongrádi Advent 2024",
+        "location": "Csongrád"
+    },
+    {
+        "date": "2024. november 30 – december 21.",
+        "title": "Advent 2024 Ajka",
+        "location": "Ajka"
+    },
+    {
+        "date": "2024. november 30 – december 22.",
+        "title": "Advent Rákosmentén 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. november 30 – december 21.",
+        "title": "Advent 2024 Visegrád",
+        "location": "Visegrád"
+    },
+    {
+        "date": "2024. november 30 – december 22.",
+        "title": "Sárvári Advent 2024",
+        "location": "Sárvár"
+    },
+    {
+        "date": "2024. november 30 – december 22.",
+        "title": "Adventi programok Balatonfenyvesen 2024",
+        "location": "Balatonfenyves"
+    },
+    {
+        "date": "2024. november 30 – 2025. január 02.",
+        "title": "A szeretet fényei – Advent Balatonszemesen 2024",
+        "location": "Balatonszemes"
+    },
+    {
+        "date": "2024. november 30 – december 22.",
+        "title": "Pápai Karácsonyi Vásár 2024",
+        "location": "Pápa"
+    },
+    {
+        "date": "2024. november 30 – 2025. február 22.",
+        "title": "Téli Korzó 2024 Zamárdi",
+        "location": "Zamárdi"
+    },
+    {
+        "date": "2024. november 30 – 2025. január 31.",
+        "title": "Jégfesztivál 2024 Balatonlelle",
+        "location": "Balatonlelle"
+    },
+    {
+        "date": "2024. december 01.",
+        "title": "Balatonszárszói Télapó Futás 2024",
+        "location": "Balatonszárszó"
+    },
+    {
+        "date": "2024. december 01.",
+        "title": "GONDOLJ ANYÁDRA! - anya lánya történet / Spirit Alkotóműhely 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 01 – 2025. január 07.",
+        "title": "Advent 2024 Szentendre",
+        "location": "Szentendre"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Téli Varázs – Karácsonyváró Napok Tihanyban 2024",
+        "location": "Tihany"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Adventi Fényvonat 2024 Székesfehérvár",
+        "location": "Székesfehérvár"
+    },
+    {
+        "date": "2024. december 01 – 2025. január 03.",
+        "title": "Fényvillamos 2024 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent 2024 Bogács",
+        "location": "Bogács"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Adventi forgatag 2024 Ózd",
+        "location": "Ózd"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Szekszárdi Advent Vasárnapok 2024",
+        "location": "Szekszárd"
+    },
+    {
+        "date": "2024. december 01 – 21.",
+        "title": "Advent 2024 Balatonkenese",
+        "location": "Balatonkenese"
+    },
+    {
+        "date": "2024. december 01 – 2025. január 26.",
+        "title": "Vörsi Betlehem 2024",
+        "location": "Vörs"
+    },
+    {
+        "date": "2024. december 01 – 21.",
+        "title": "Advent Felsőtárkányban 2024",
+        "location": "Felsőtárkány"
+    },
+    {
+        "date": "2024. december 01 – 23.",
+        "title": "Advent a Hegyvidéken 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent 2024 Alsóörs",
+        "location": "Alsóörs"
+    },
+    {
+        "date": "2024. december 01 – 21.",
+        "title": "Advent 2024 Zánka",
+        "location": "Zánka"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent 2024 Vonyarcvashegy",
+        "location": "Vonyarcvashegy"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent 2024 Pomáz",
+        "location": "Pomáz"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent 2024 Balatonfűzfő",
+        "location": "Balatonfűzfő"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Adventi gyertyagyújtások Balatonszemesen 2024",
+        "location": "Balatonszemes"
+    },
+    {
+        "date": "2024. december 01 – 24.",
+        "title": "Advent 2024 Zamárdi",
+        "location": "Zamárdi"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent Vasárnapi Esték 2024 Balatonfőkajár",
+        "location": "Balatonfőkajár"
+    },
+    {
+        "date": "2024. december 01 – 2025. január 06.",
+        "title": "Fényvillamos 2024 Debrecen",
+        "location": "Debrecen"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent 2024 Halásztelek",
+        "location": "Halásztelek"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Adventi várakozás Tapolcán 2024",
+        "location": "Tapolca"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Földvári Advent 2024 Dunaföldvár",
+        "location": "Dunaföldvár"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent a Budavári Palotanegyedben 2024 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Jászberény Advent 2024",
+        "location": "Jászberény"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Palotai advent 2024 Várpalota",
+        "location": "Várpalota"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Adventi hangolódás 2024 Tiszaújváros",
+        "location": "Tiszaújváros"
+    },
+    {
+        "date": "2024. december 01 – 31.",
+        "title": "Advent 2024 Nyíregyháza",
+        "location": "Nyíregyháza"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent 2024 Tatabánya",
+        "location": "Tatabánya"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent 2024 Komárom",
+        "location": "Komárom"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Békési Advent 2024",
+        "location": "Békés"
+    },
+    {
+        "date": "2024. december 01 – 23.",
+        "title": "Advent 2024 Tiszafüred",
+        "location": "Tiszafüred"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Advent 2024 Hajdúszoboszló",
+        "location": "Hajdúszoboszló"
+    },
+    {
+        "date": "2024. december 01 – 20.",
+        "title": "Balatonedericsi Advent 2024",
+        "location": "Balatonederics"
+    },
+    {
+        "date": "2024. december 01 – 22.",
+        "title": "Újbudai Karácsonyi Vásár 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 01 – 24.",
+        "title": "Kaposvári Advent 2024",
+        "location": "Kaposvár"
+    },
+    {
+        "date": "2024. december 02.",
+        "title": "RÁKÁSZ GERGELY - TÉL - Kiskunfélegyháza",
+        "location": "Kiskunfélegyháza"
+    },
+    {
+        "date": "2024. december 03.",
+        "title": "József Attila Emléknap 2024 Balatonszárszó",
+        "location": "Balatonszárszó"
+    },
+    {
+        "date": "2024. december 04.",
+        "title": "JazzKamra – Mr. Moodburn 2024 Gyenesdiás",
+        "location": "Gyenesdiás"
+    },
+    {
+        "date": "2024. december 04.",
+        "title": "RÁKÁSZ GERGELY - TÉL - Hódmezővásárhely",
+        "location": "Hódmezővásárhely"
+    },
+    {
+        "date": "2024. december 05.",
+        "title": "Hajdúszoboszlóra költözik a Mikulás 2024",
+        "location": "Hajdúszoboszló"
+    },
+    {
+        "date": "2024. december 05.",
+        "title": "Érkezik a Mikulás 2024 Zamárdi",
+        "location": "Zamárdi"
+    },
+    {
+        "date": "2024. december 06.",
+        "title": "Siófok város Mikulása 2024",
+        "location": "Siófok"
+    },
+    {
+        "date": "2024. december 06.",
+        "title": "Mikulás motorozás 2024 Hévíz",
+        "location": "Hévíz"
+    },
+    {
+        "date": "2024. december 06 – 08.",
+        "title": "Mikulásvonat a Gyermekvasúton 2024 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 07.",
+        "title": "Adventi Pincenyitogató 2024 Hajós",
+        "location": "Hajós"
+    },
+    {
+        "date": "2024. december 07.",
+        "title": "Tihanyi forraltbor főzőverseny 2024",
+        "location": "Tihany"
+    },
+    {
+        "date": "2024. december 07 – 08.",
+        "title": "Csak a Mentes Karácsonyi Fesztivál 2024 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 07.",
+        "title": "RÁKÁSZ GERGELY - TÉL - Székesfehérvár",
+        "location": "Székesfehérvár"
+    },
+    {
+        "date": "2024. december 07 – 08.",
+        "title": "Adventi Varázs Palkonyán 2024",
+        "location": "Palkonya"
+    },
+    {
+        "date": "2024. december 07 – 08.",
+        "title": "Adventi Zsibongás a Medvehagyma Háznál 2024 Orfű",
+        "location": "Orfű"
+    },
+    {
+        "date": "2024. december 07.",
+        "title": "Adventi vásár Szőlőskislakon 2024 Balatonboglár",
+        "location": "Balatonboglár"
+    },
+    {
+        "date": "2024. december 07 – 22.",
+        "title": "Karácsonyi vásár Szilvásváradon 2024",
+        "location": "Szilvásvárad"
+    },
+    {
+        "date": "2024. december 08.",
+        "title": "RÁKÁSZ GERGELY - TÉL - Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 08.",
+        "title": "Advent a barlanglakásokban 2024 Noszvaj",
+        "location": "Noszvaj"
+    },
+    {
+        "date": "2024. december 09.",
+        "title": "ÁRVA FIÚ - Cserháti Zsuzsa és Szécsi Pál története – Gyula",
+        "location": "Gyula"
+    },
+    {
+        "date": "2024. december 11.",
+        "title": "Különben jól vagyok - este POPPER PÉTER írásaiból – Szolnok",
+        "location": "Szolnok"
+    },
+    {
+        "date": "2024. december 13.",
+        "title": "RÁKÁSZ GERGELY - TÉL - Komárom",
+        "location": "Komárom"
+    },
+    {
+        "date": "2024. december 13 – 20.",
+        "title": "Advent – Ünnepre Hangolódó 2024 Fonyód",
+        "location": "Fonyód"
+    },
+    {
+        "date": "2024. december 13 – 14.",
+        "title": "Karácsonyi kézműves vásár 2024 Berettyóújfalu",
+        "location": "Berettyóújfalu"
+    },
+    {
+        "date": "2024. december 14 – 15.",
+        "title": "Méz- és Mézeskalács Fesztivál 2024 Gyula",
+        "location": "Gyula"
+    },
+    {
+        "date": "2024. december 14.",
+        "title": "Somló Kapuja forralt bor főző- és süteménysütő verseny 2024 Somlóvásárhely",
+        "location": "Somlóvásárhely"
+    },
+    {
+        "date": "2024. december 14.",
+        "title": "RÁKÁSZ GERGELY - TÉL - Kaposvár",
+        "location": "Kaposvár"
+    },
+    {
+        "date": "2024. december 14 – 15.",
+        "title": "Adventi gesztenyesütés és karácsonyi vásár 2024 Gyenesdiás",
+        "location": "Gyenesdiás"
+    },
+    {
+        "date": "2024. december 14.",
+        "title": "Adventi vásár 2024 Pilisvörösvár",
+        "location": "Pilisvörösvár"
+    },
+    {
+        "date": "2024. december 14 – 22.",
+        "title": "Karácsonyi Kézműves Vásár – Téli Fesztivál Nagykőrösön 2024",
+        "location": "Nagykőrös"
+    },
+    {
+        "date": "2024. december 14 – 15.",
+        "title": "Adventi Kastélynapok 2024 Gödöllő",
+        "location": "Gödöllő"
+    },
+    {
+        "date": "2024. december 15.",
+        "title": "RÁKÁSZ GERGELY - TÉL - Dunaújváros",
+        "location": "Dunaújváros"
+    },
+    {
+        "date": "2024. december 15.",
+        "title": "Mindörökké barátnők - a Spirit Alkotóműhely előadása 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 15.",
+        "title": "Kacagás és könnyek - borkóstolóval fűszerezett színházi est 2024 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 15.",
+        "title": "Karácsonyváró fényfelvonulás 2024 Balatonfőkajár",
+        "location": "Balatonfőkajár"
+    },
+    {
+        "date": "2024. december 15.",
+        "title": "Karácsonyi vásár az Öttevényi-kastélyban 2024",
+        "location": "Öttevény"
+    },
+    {
+        "date": "2024. december 19.",
+        "title": "Falukarácsony 2024 Balatongyörök",
+        "location": "Balatongyörök"
+    },
+    {
+        "date": "2024. december 20.",
+        "title": "RÁKÁSZ GERGELY - TÉL - Szombathely",
+        "location": "Szombathely"
+    },
+    {
+        "date": "2024. december 20.",
+        "title": "A SHOW nélkülünk megy tovább - a Spirit Alkotóműhely előadása 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 21.",
+        "title": "Zamárdi Kertmozi Karácsony 2024",
+        "location": "Zamárdi"
+    },
+    {
+        "date": "2024. december 22.",
+        "title": "\"Nyanyák\" újratöltve - vígjáték / A Spirit Alkotóműhely előadása 2024",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 26 – 27.",
+        "title": "RÁKÁSZ GERGELY - TÉL - Győr",
+        "location": "Győr"
+    },
+    {
+        "date": "2024. december 27 – 31.",
+        "title": "Puncs Party és Szilveszter 2024 Siófok",
+        "location": "Siófok"
+    },
+    {
+        "date": "2024. december 27 – 31.",
+        "title": "Csillagvarázs 2024 Zalakaros",
+        "location": "Zalakaros"
+    },
+    {
+        "date": "2024. december 27.",
+        "title": "ÁRVA FIÚ - Cserháti Zsuzsa és Szécsi Pál története – Esztergom",
+        "location": "Esztergom"
+    },
+    {
+        "date": "2024. december 28.",
+        "title": "Különben jól vagyok – este POPPER PÉTER írásaiból – Balatonfüred",
+        "location": "Balatonfüred"
+    },
+    {
+        "date": "2024. december 30.",
+        "title": "Különben jól vagyok - este POPPER PÉTER írásaiból – Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2024. december 31.",
+        "title": "Óévbúcsúztató szilveszteri csergetés 2024 Hajdúszoboszló",
+        "location": "Hajdúszoboszló"
+    },
+    {
+        "date": "2024. december 31.",
+        "title": "Óévbúcsúztató pancsolás Ábrahámhegyen 2024",
+        "location": "Ábrahámhegy"
+    },
+    {
+        "date": "2024. december 31.",
+        "title": "New year warmup - Évzáró gourmet ünnep a Fény Utcai piacon 2024 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2025. január 09.",
+        "title": "Kacagás és könnyek - borkóstolóval fűszerezett színházi est 2025 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2025. január 12.",
+        "title": "Mindörökké barátnők - a Spirit Alkotóműhely előadása 2025",
+        "location": "Budapest"
+    },
+    {
+        "date": "2025. január 18.",
+        "title": "\"Nyanyák\" újratöltve - vígjáték / A Spirit Alkotóműhely előadása 2025",
+        "location": "Budapest"
+    },
+    {
+        "date": "2025. január 19.",
+        "title": "ÁRVA FIÚ - Cserháti Zsuzsa és Szécsi Pál története – Komárom",
+        "location": "Komárom"
+    },
+    {
+        "date": "2025. január 19.",
+        "title": "GONDOLJ ANYÁDRA! - anya lánya történet / Spirit Alkotóműhely 2025",
+        "location": "Budapest"
+    },
+    {
+        "date": "2025. január 26.",
+        "title": "A SHOW nélkülünk megy tovább - a Spirit Alkotóműhely előadása 2025",
+        "location": "Budapest"
+    },
+    {
+        "date": "2025. január 31.",
+        "title": "Különben jól vagyok - este POPPER PÉTER írásaiból – Pécs",
+        "location": "Pécs"
+    },
+    {
+        "date": "2025. február 01.",
+        "title": "Keszthelyi városi karnevál 2025",
+        "location": "Keszthely"
+    },
+    {
+        "date": "2025. február 08.",
+        "title": "Vas Vármegyei Gasztronómiai Fesztivál és Böllérverseny 2025 Győrvár",
+        "location": "Győrvár"
+    },
+    {
+        "date": "2025. február 14 – 16.",
+        "title": "Jász Kolbásztöltő Fesztivál 2025 Jászberény",
+        "location": "Jászberény"
+    },
+    {
+        "date": "2025. február 14 – 16.",
+        "title": "Miskolci Kocsonyafesztivál 2025",
+        "location": "Miskolc"
+    },
+    {
+        "date": "2025. február 15.",
+        "title": "Dunakeszi Mindmegeszi Toroskáposzta- és Böllérverseny 2025",
+        "location": "Dunakeszi"
+    },
+    {
+        "date": "2025. február 15.",
+        "title": "Kevi Böllértalálkozó 2025 Túrkeve",
+        "location": "Túrkeve"
+    },
+    {
+        "date": "2025. február 20 – 23.",
+        "title": "Budapest Boat Show 2025 - Jegyvásárlás",
+        "location": "Budapest"
+    },
+    {
+        "date": "2025. február 20 – 23.",
+        "title": "Utazás Kiállítás Hungexpo 2025 - Jegyvásárlás",
+        "location": "Budapest"
+    },
+    {
+        "date": "2025. február 27 – március 04.",
+        "title": "Mohácsi Busójárás 2025 - Programok",
+        "location": "Mohács"
+    },
+    {
+        "date": "2025. március 01.",
+        "title": "Kapuvári Böllérmáj és Gasztronómiai Fesztivál 2025",
+        "location": "Kapuvár"
+    },
+    {
+        "date": "2025. március 01.",
+        "title": "Remélés 2025 Novaj",
+        "location": "Novaj"
+    },
+    {
+        "date": "2025. április 12 – 13.",
+        "title": "Oldtimer Show a Magyar Vasúttörténeti Parkban 2025 Budapest",
+        "location": "Budapest"
+    },
+    {
+        "date": "2025. április 18 – 21.",
+        "title": "Hollókői Húsvéti Fesztivál 2025",
+        "location": "Hollókő"
+    },
+    {
+        "date": "2025. április 20 – 21.",
+        "title": "Matyó Húsvét 2025 Mezőkövesd",
+        "location": "Mezőkövesd"
+    }
+]
